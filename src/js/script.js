@@ -6,20 +6,30 @@ function processText() {
   name = name.replace(/ /g, '');
   name = name.toLowerCase();
 
- console.log(name);
+ if (validate(name) == false) {
+    document.getElementById("result").innerHTML = "SOS! MAYDAY! <br> This tool only accepts letters in the swedish alphabet.";
+    return;
+ }
 
   var useQuarterTones =
 document.getElementById("qtone").checked;
 
 document.getElementById("result").innerHTML = "";
 
-if (useQuarterTones) {
-processQuarterTones(name);
-} else {
-processChromatic(name);
+    if (useQuarterTones) {
+        processQuarterTones(name);
+    } else {
+        processChromatic(name);
+    }
 }
 
-
+function validate(name) {
+    for (let i = 0; i < name.length; i++) {
+        if ("abcdefghijklmnopqrstuvwxyzåäö".includes(name.charAt(i)) == false) {
+            return false;
+        }
+    }
+    return true;
 }
 
 function processChromatic(name) {
