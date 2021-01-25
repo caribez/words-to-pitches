@@ -23,7 +23,8 @@ processChromatic(name);
 }
 
 function processChromatic(name) {
-
+let result = "";
+  
 for (let i = 0; i < name.length; i++) {
   var ascii = name.charCodeAt(i);
 
@@ -34,10 +35,14 @@ for (let i = 0; i < name.length; i++) {
 document.getElementById("result").innerHTML += "character: " + name.charAt(i) + "<br>";
 document.getElementById("result").innerHTML += "mapped pitch class: " + pitchClass + "<br>";
 document.getElementById("result").innerHTML += "pitch name: " + pitchName + "<br><br>";
+  result += pitchName + ", ";
 }
+  document.getElementById("result").innerHTML += result;
 }
 
 function processQuarterTones(name) {
+  let result = "";
+  
 for (let i = 0; i < name.length; i++) {
   var ascii = name.charCodeAt(i);
 
@@ -48,7 +53,9 @@ let pitchName = toPitchNameQuarterTone(pitchClass);
 document.getElementById("result").innerHTML += "character: " + name.charAt(i) + "<br>";
 document.getElementById("result").innerHTML += "mapped pitch class: " + pitchClass + "<br>";
 document.getElementById("result").innerHTML += "pitch name: " + pitchName + "<br><br>";
+  result += pitchName + ", ";
 }
+  document.getElementById("result").innerHTML += result;
 }
 
 function toPitch(ascii) {
