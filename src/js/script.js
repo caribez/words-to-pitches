@@ -37,7 +37,7 @@ for (let i = 0; i < name.length; i++) {
   log += "mapped pitch class: " + pitchClass + "<br>";
   log += "pitch name: " + pitchName + "<br><br>";
   result += pitchName;
-  if (i < name.length) {
+  if (i < name.length - 1) {
     result += ", ";
   }
 }
@@ -47,20 +47,24 @@ for (let i = 0; i < name.length; i++) {
 
 function processQuarterTones(name) {
   let result = "";
+  let log = "";
   
 for (let i = 0; i < name.length; i++) {
   var ascii = name.charCodeAt(i);
 
-let pitchClass = toPitchQuarterTone(ascii);
-let pitchName = toPitchNameQuarterTone(pitchClass);
+  let pitchClass = toPitchQuarterTone(ascii);
+  let pitchName = toPitchNameQuarterTone(pitchClass);
 
-
-document.getElementById("result").innerHTML += "character: " + name.charAt(i) + "<br>";
-document.getElementById("result").innerHTML += "mapped pitch class: " + pitchClass + "<br>";
-document.getElementById("result").innerHTML += "pitch name: " + pitchName + "<br><br>";
-  result += pitchName + ", ";
+  log += "character: " + name.charAt(i) + "<br>";
+  log += "mapped pitch class: " + pitchClass + "<br>";
+  log += "pitch name: " + pitchName + "<br><br>";
+  result += pitchName;
+   if (i < name.length - 1) {
+    result += ", ";
+  }
 }
-  document.getElementById("result").innerHTML += result;
+  document.getElementById("result").innerHTML += result + "<br><br>";
+  document.getElementById("result").innerHTML += log;
 }
 
 function toPitch(ascii) {
