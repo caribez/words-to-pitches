@@ -1,4 +1,41 @@
 
+function process(pitches) {
+ let headerText = generateHeaderText();
+ let footerText = generateFooterText();
+    
+ let pitchText = headerText;
+    
+    for (let i = 0; i < pitches.length; i+++) {
+        let pitchInfo = pitches[i];
+        pitch = pitchInfo.trim();
+    
+        let isSharp = pitchInfo.contains("#");
+        let isQuarterSharp = pitchInfo.contains("quarter");  
+    
+        let alterValue = 0;
+        if (isSharp) alterValue += 1;
+        if (isQuarterSharp) alterValue += 0.5;    
+         
+        pitchText += "<note>";
+        pitchText += "<pitch>"; 
+        pitchText += "<step>";          
+        pitchText += pitchInfo.charAt(0);     
+        pitchText += "</step>";    
+        pitchText += "<alter>";        
+        pitchText += alterValue;
+        pitchText += "</alter>";        
+        pitchText += "<octave>4</octave>";         
+        pitchText += "</pitch>";
+        pitchText += "<duration>4</duration>";
+        pitchText += "<type>eighth</type>";
+        pitchText += "</note>";         
+    }
+
+    pitchText += footerText;
+
+    console.log(pitchText);
+    return pitchText;
+}
 
 function generateHeaderText() {
 return `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
