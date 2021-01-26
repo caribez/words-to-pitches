@@ -11,16 +11,18 @@ function processText() {
     return;
  }
 
-  var useQuarterTones =
-document.getElementById("qtone").checked;
+  var useQuarterTones = document.getElementById("qtone").checked;
 
-document.getElementById("result").innerHTML = "";
+  document.getElementById("result").innerHTML = "";
 
+  let result;
     if (useQuarterTones) {
-        processQuarterTones(name);
+        result = processQuarterTones(name);
     } else {
-        processChromatic(name);
+        result = processChromatic(name);
     }
+  let xml = convertToXML(result);
+  console.log(xml);
 }
 
 function validate(name) {
@@ -35,6 +37,7 @@ function validate(name) {
 function processChromatic(name) {
   let result = "";
   let log = "";
+  let pitchList = [];
   
 for (let i = 0; i < name.length; i++) {
   var ascii = name.charCodeAt(i);
@@ -50,14 +53,17 @@ for (let i = 0; i < name.length; i++) {
   if (i < name.length - 1) {
     result += ", ";
   }
+  pitchList.push(pitchName);
 }
   document.getElementById("result").innerHTML += result + "<br><br>";
   document.getElementById("result").innerHTML += log;
+  return pitchList;
 }
 
 function processQuarterTones(name) {
   let result = "";
   let log = "";
+  let pitchList = [];
   
 for (let i = 0; i < name.length; i++) {
   var ascii = name.charCodeAt(i);
@@ -72,9 +78,11 @@ for (let i = 0; i < name.length; i++) {
    if (i < name.length - 1) {
     result += ", ";
   }
+    pitchList.push(pitchName);
 }
   document.getElementById("result").innerHTML += result + "<br><br>";
   document.getElementById("result").innerHTML += log;
+  return pitchList;
 }
 
 function toPitch(ascii) {
