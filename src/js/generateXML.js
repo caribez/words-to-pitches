@@ -1,5 +1,5 @@
 
-function process(pitches) {
+function convertToXML(pitches) {
  let headerText = generateHeaderText();
  let footerText = generateFooterText();
     
