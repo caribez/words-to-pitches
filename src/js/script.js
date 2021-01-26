@@ -7,14 +7,18 @@ function processText() {
   name = name.replace(/ /g, '');
   name = name.toLowerCase();
 
- if (validate(name) == false) {
-    document.getElementById("result").innerHTML = "SOS! MAYDAY! <br> This tool only accepts letters in the swedish alphabet.";
-    return;
+    let oldName = name;
+
+    name = validate(name);
+
+  document.getElementById("result").innerHTML = "";
+
+ if (name != oldName) {
+    document.getElementById("result").innerHTML = "WARNING! <br> This tool only accepts letters in the swedish alphabet. Some letters or symbols were removed from the result.<br>";
+    //return;
  }
 
   var useQuarterTones = document.getElementById("qtone").checked;
-
-  document.getElementById("result").innerHTML = "";
 
   let result;
     if (useQuarterTones) {
@@ -23,20 +27,23 @@ function processText() {
         result = processChromatic(name);
     }
   xml = convertToXML(result);
-  console.log(xml);
-  
+
 	document.getElementById("dlButton").innerHTML = `
 		<button onclick="downloadWrapper()">Download result</button>
 	`;
 }
 
 function validate(name) {
-    for (let i = 0; i < name.length; i++) {
-        if ("abcdefghijklmnopqrstuvwxyzåäö".includes(name.charAt(i)) == false) {
-            return false;
+    for (let i = name.length - 1; i >= 0; i--) {
+        if ("abcdefghijklmnopqrstuvwxyzåäö".includes(name.charAt(i)) === false) {
+        var tmp = name.split(''); // convert to an array
+        tmp.splice(i, 1); // remove 1 element from the array
+        name = tmp.join(''); // reconstruct the string
+        //return false;
         }
     }
-    return true;
+    return name;
+    //return true;
 }
 
 function processChromatic(name) {
@@ -46,7 +53,7 @@ function processChromatic(name) {
   
 for (let i = 0; i < name.length; i++) {
   var ascii = name.charCodeAt(i);
-
+console.log("forloop " + i);
   let pitchClass = toPitch(ascii);
 
   let pitchName = toPitchName(pitchClass);
