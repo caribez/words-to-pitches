@@ -29,7 +29,7 @@ function processText() {
   xml = convertToXML(result);
 
 	document.getElementById("dlButton").innerHTML = `
-		<button onclick="downloadWrapper()">Download result</button>
+		<button onclick="downloadWrapper()">Download result as MusicXML</button>
 	`;
 }
 
@@ -47,17 +47,16 @@ function validate(name) {
 }
 
 function processChromatic(name) {
-  let result = "";
-  let log = "";
+  let result = "<p>";
+  let log = "<p>";
   let pitchList = [];
   
 for (let i = 0; i < name.length; i++) {
   var ascii = name.charCodeAt(i);
-console.log("forloop " + i);
   let pitchClass = toPitch(ascii);
 
   let pitchName = toPitchName(pitchClass);
-
+  
   log += "character: " + name.charAt(i) + "<br>";
   log += "mapped pitch class: " + pitchClass + "<br>";
   log += "pitch name: " + pitchName + "<br><br>";
@@ -67,14 +66,17 @@ console.log("forloop " + i);
   }
   pitchList.push(pitchName);
 }
-  document.getElementById("result").innerHTML += result + "<br><br>";
+log += "</p>";
+result += "</p>";
+
+  document.getElementById("result").innerHTML += result;
   document.getElementById("result").innerHTML += log;
   return pitchList;
 }
 
 function processQuarterTones(name) {
-  let result = "";
-  let log = "";
+  let result = "<p>";
+  let log = "<p>";
   let pitchList = [];
   
 for (let i = 0; i < name.length; i++) {
@@ -92,7 +94,11 @@ for (let i = 0; i < name.length; i++) {
   }
     pitchList.push(pitchName);
 }
-  document.getElementById("result").innerHTML += result + "<br><br>";
+
+    log += "</p>";
+    result += "</p>";
+
+  document.getElementById("result").innerHTML += result;
   document.getElementById("result").innerHTML += log;
   return pitchList;
 }
