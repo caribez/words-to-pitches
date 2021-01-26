@@ -1,3 +1,4 @@
+var xml;
 
 function processText() {
 
@@ -21,8 +22,12 @@ function processText() {
     } else {
         result = processChromatic(name);
     }
-  let xml = convertToXML(result);
+  xml = convertToXML(result);
   console.log(xml);
+  
+	document.getElementById("dlButton").innerHTML = `
+		<button onclick="downloadWrapper()">Download result</button>
+	`;
 }
 
 function validate(name) {
@@ -230,4 +235,22 @@ function toPitchNameQuarterTone(pitchNum) {
 
 return pitchName;
 
+}
+
+function downloadWrapper() {
+	// Start file download.
+	download("result.xml", xml);
+}
+
+function download(filename, text) {
+  var element = document.createElement('a');
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+  element.setAttribute('download', filename);
+
+  element.style.display = 'none';
+  document.body.appendChild(element);
+
+  element.click();
+
+  document.body.removeChild(element);
 }
