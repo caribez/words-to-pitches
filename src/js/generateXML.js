@@ -32,8 +32,6 @@ function convertToXML(pitches) {
     }
 
     pitchText += footerText;
-
-    console.log(pitchText);
     return pitchText;
 }
 
