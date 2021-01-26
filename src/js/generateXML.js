@@ -5,12 +5,12 @@ function convertToXML(pitches) {
     
  let pitchText = headerText;
     
-    for (let i = 0; i < pitches.length; i+++) {
+    for (let i = 0; i < pitches.length; i++) {
         let pitchInfo = pitches[i];
-        pitch = pitchInfo.trim();
+        let pitch = pitchInfo.trim();
     
-        let isSharp = pitchInfo.contains("#");
-        let isQuarterSharp = pitchInfo.contains("quarter");  
+        let isSharp = pitchInfo.includes("#");
+        let isQuarterSharp = pitchInfo.includes("quarter");  
     
         let alterValue = 0;
         if (isSharp) alterValue += 1;
